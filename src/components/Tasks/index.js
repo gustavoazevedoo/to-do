@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   CreateTask, TaskList, Footer,
 } from './styles';
@@ -7,7 +7,15 @@ import plus from '../../assets/images/icons/plus.svg';
 import Task from './Task';
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const storageData = localStorage.getItem('tasks');
+
+    if (storageData) {
+      return JSON.parse(storageData);
+    }
+
+    return [];
+  });
   const [isAllActive, setIsAllActive] = useState(true);
   const [isActive, setIsActive] = useState(false);
   const [isCompleteActive, setIsCompleteActive] = useState(false);
@@ -16,6 +24,10 @@ export default function Tasks() {
 
   const completedTasks = useMemo(() => tasks.filter((task) => task.isComplete), [tasks]);
   const uncompletedTasks = useMemo(() => tasks.filter((task) => !task.isComplete), [tasks]);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  });
 
   function handleShowAllTasks() {
     setIsAllActive(true);
