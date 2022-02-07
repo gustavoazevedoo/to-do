@@ -27,7 +27,8 @@ export default function Tasks() {
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-  });
+    console.log('render');
+  }, [tasks]);
 
   function handleShowAllTasks() {
     setIsAllActive(true);
