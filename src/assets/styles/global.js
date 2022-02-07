@@ -9,7 +9,9 @@ export default createGlobalStyle`
   }
 
   body {
-    font-size: 1.125rem;
+    font-size: 18px;
+    background: hsl(235, 21%, 11%);
+
   }
 
   button {
