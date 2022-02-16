@@ -8,13 +8,21 @@ export default createGlobalStyle`
     font-family: 'Josefin Sans', sans-serif;
   }
 
-  body {
+  html {
     font-size: 18px;
-    background: hsl(235, 21%, 11%);
+  }
 
+  body {
+    background: hsl(235, 21%, 11%);
   }
 
   button {
     cursor: pointer;
+  }
+
+  @media(max-width: 575.98px) {
+    html {
+      font-size: 16px;
+    }
   }
 `;

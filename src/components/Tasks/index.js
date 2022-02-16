@@ -27,7 +27,6 @@ export default function Tasks() {
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    console.log('render');
   }, [tasks]);
 
   function handleShowAllTasks() {
@@ -82,6 +81,29 @@ export default function Tasks() {
     setTasks(uncompletedTasks);
   }
 
+  function handleRemoveTask(id) {
+    const filteredTasks = tasks.filter((task) => task.id !== id);
+    setTasks(filteredTasks);
+  }
+
+  function showTasks(tasksToShow) {
+    if (tasksToShow.length < 1 && tasksToShow !== tasks) {
+      return (
+        <h2>Nenhuma tarefa aqui </h2>
+      );
+    }
+    return (
+      tasksToShow.map((task) => (
+        <Task
+          key={task.id}
+          task={task}
+          onToggleTaskCompletion={handleToggleTaskCompletion}
+          onRemoveTask={handleRemoveTask}
+        />
+      ))
+    );
+  }
+
   return (
     <>
       <CreateTask>
@@ -101,33 +123,15 @@ export default function Tasks() {
 
       <TaskList>
         {isAllActive && (
-          tasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              onToggleTaskCompletion={handleToggleTaskCompletion}
-            />
-          ))
+          showTasks(tasks)
         )}
 
         {isActive && (
-          uncompletedTasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              onToggleTaskCompletion={handleToggleTaskCompletion}
-            />
-          ))
+          showTasks(uncompletedTasks)
         )}
 
         {isCompleteActive && (
-          completedTasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task}
-              onToggleTaskCompletion={handleToggleTaskCompletion}
-            />
-          ))
+          showTasks(completedTasks)
         )}
       </TaskList>
 
@@ -135,8 +139,7 @@ export default function Tasks() {
         <Footer>
           <span>
             {uncompletedTasks.length}
-            {' '}
-            items left
+            {uncompletedTasks.length === 1 ? ' item left' : ' items left'}
           </span>
           <div className="filters">
             <button

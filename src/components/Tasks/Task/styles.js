@@ -3,10 +3,16 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   background: hsl(235, 24%, 19%);
   border-radius: 4px;
   border-bottom: 1px solid hsl(233, 14%, 35%);
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 
   input[type="checkbox"] {
     position: absolute;
@@ -63,13 +69,19 @@ export const Container = styled.div`
     }
   }
 
-    p, s {
-    font-size: 18px;
+  p, s {
+    font-size: 1rem;
     color:  hsl(234, 39%, 85%);
     margin-left: 16px;
   }
 
   s {
     color: hsl(233, 14%, 35%);
+  }
+
+  button {
+    font-size: 0;
+    background: transparent;
+    border: none;
   }
 `;

@@ -41,14 +41,18 @@ export const Footer = styled.footer`
   padding: 20px;
   background: hsl(235, 24%, 19%);
   color:  hsl(233, 14%, 35%);
-  font-size: 14px;
+  font-size: 0.75rem;
 
   .filters {
     display: flex;
-    margin: 0 4px;
+    margin: 0 12px;
+
+    button {
+      font-weight: bold;
+    }
 
     button + button {
-      margin-left: 16px;
+      margin-left: 0.875rem;
     }
 
     button.active {
@@ -60,5 +64,11 @@ export const Footer = styled.footer`
     color:  hsl(233, 14%, 35%);
     background: none;
     border: 0;
+    transition: .2s;
+    font-size: 0.75rem;
+  }
+
+  button:hover {
+    color: hsl(234, 39%, 85%)
   }
 `;
